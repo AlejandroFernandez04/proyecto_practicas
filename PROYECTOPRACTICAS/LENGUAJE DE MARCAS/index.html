@@ -6,68 +6,38 @@
   <title>Portal de Eventos Sostenibles</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Contenedor del carrusel */
-    .carousel-container {
-      position: relative;
+    /* Contenedor de los eventos en primera plana */
+    .eventos-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       max-width: 1000px;
       margin: auto;
-      overflow: hidden;
-      height: 500px; /* Ajusta la altura según necesites */
     }
-    /* Cada slide se posiciona de manera absoluta y se oculta con opacidad */
-    .carousel-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    /* La diapositiva activa se muestra con opacidad 1 */
-    .carousel-slide.active {
-      opacity: 1;
-    }
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .evento {
+      flex: 1;
+      background-color: #f4f4f4;
       border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .carousel-caption {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
+    .evento img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .evento .evento-caption {
       padding: 10px;
-      border-radius: 5px;
-    }
-    /* Estilos para los controles de flechas */
-    .prev, .next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
+      background: #333;
       color: #fff;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-      font-size: 24px;
-      z-index: 10;
-    }
-    .prev {
-      left: 10px;
-    }
-    .next {
-      right: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>PROYECTO PRACTICAS</h1>
+    <h1>PROYECTO PRÁCTICAS</h1>
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
@@ -80,67 +50,33 @@
       <h2>Bienvenidos al Portal</h2>
       <p>Gestiona y descubre eventos relacionados con la sostenibilidad: conferencias, talleres y actividades ecológicas.</p>
     </section>
-    <section class="carrusel">
+    <section class="eventos">
       <h2>Eventos Destacados</h2>
-      <div class="carousel-container">
-        <!-- Cada slide corresponde a un evento -->
-        <div class="carousel-slide active">
+      <div class="eventos-container">
+        <div class="evento">
           <a href="detalle1.html">
             <img src="img/event1.jpg" alt="Conferencia sobre Energía Renovable">
-            <div class="carousel-caption">Conferencia sobre Energía Renovable</div>
+            <div class="evento-caption">Conferencia sobre Energía Renovable</div>
           </a>
         </div>
-        <div class="carousel-slide">
+        <div class="evento">
           <a href="detalle2.html">
             <img src="img/event2.jpg" alt="Taller de Reciclaje">
-            <div class="carousel-caption">Taller de Reciclaje</div>
+            <div class="evento-caption">Taller de Reciclaje</div>
           </a>
         </div>
-        <div class="carousel-slide">
+        <div class="evento">
           <a href="detalle3.html">
             <img src="img/event3.jpg" alt="Actividad Ecológica en el Parque">
-            <div class="carousel-caption">Actividad Ecológica en el Parque</div>
+            <div class="evento-caption">Actividad Ecológica en el Parque</div>
           </a>
         </div>
-        <!-- Controles de flechas -->
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
       </div>
     </section>
   </main>
   <footer>
     <p>&copy; 2025 Portal de Eventos Sostenibles</p>
   </footer>
-  <script>
-    let slideIndex = 0;
-    const slides = document.getElementsByClassName("carousel-slide");
-    let slideInterval = setInterval(nextSlide, 10000); // Cambia cada 10 segundos
-
-    function showSlide(index) {
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active");
-      }
-      slides[index].classList.add("active");
-    }
-
-    function nextSlide() {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    function prevSlide() {
-      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    // Reinicia el intervalo cuando se usan los controles para que no se solape el cambio automático
-    function resetInterval() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(nextSlide, 10000);
-    }
-
-    document.querySelector('.prev').addEventListener('click', resetInterval);
-    document.querySelector('.next').addEventListener('click', resetInterval);
-  </script>
 </body>
 </html>
+
