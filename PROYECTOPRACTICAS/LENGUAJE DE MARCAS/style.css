@@ -1,0 +1,144 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos globales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ea;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #2c6e49;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  background-color: #4caf50;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+main {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+footer {
+  background-color: #2c6e49;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* Sección de presentación */
+.presentacion {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Carrusel de eventos */
+.carrusel {
+  margin-bottom: 20px;
+}
+
+.carrusel h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.carrusel .slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.carrusel .slider figure {
+  min-width: 300px;
+  margin-right: 20px;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.carrusel .slider img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.carrusel .slider figcaption {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Tabla de eventos */
+.eventos table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.eventos th, .eventos td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.eventos th {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Detalle del evento */
+.detalle-evento {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.detalle-evento img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Botones y enlaces */
+.btn {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #3e8e41;
+}
