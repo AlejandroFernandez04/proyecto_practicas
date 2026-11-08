@@ -5,7 +5,7 @@ name: Publicar Sonora en GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ["PROYECTOPRACTICAS/APP MUSICA/www/**"]
+    paths: ["PROYECTOPRACTICAS/APP MUSICA/www/**", "index.html"]
   workflow_dispatch:
 
 permissions:
@@ -27,9 +27,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Misma estructura que "Implementar desde una rama": la raíz redirige a la app
+      - name: Preparar la web
+        run: |
+          mkdir -p "_site/PROYECTOPRACTICAS/APP MUSICA"
+          cp -r "PROYECTOPRACTICAS/APP MUSICA/www" "_site/PROYECTOPRACTICAS/APP MUSICA/www"
+          cp index.html .nojekyll _site/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: "PROYECTOPRACTICAS/APP MUSICA/www"
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
       - run: echo "Publicado en ${{ steps.deployment.outputs.page_url }}"
