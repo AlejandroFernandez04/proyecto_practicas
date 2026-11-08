@@ -20,8 +20,9 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Entorno propio (sin reglas de protección) en lugar de "github-pages"
     environment:
-      name: github-pages
+      name: sonora-web
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
@@ -31,3 +32,4 @@ jobs:
           path: "PROYECTOPRACTICAS/APP MUSICA/www"
       - id: deployment
         uses: actions/deploy-pages@v4
+      - run: echo "Publicado en ${{ steps.deployment.outputs.page_url }}"
