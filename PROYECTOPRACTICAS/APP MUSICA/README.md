@@ -37,7 +37,7 @@ Queda con su icono en la pantalla de inicio y se abre a pantalla completa, como 
   y arrastra el archivo `Sonora-web.zip`. Te dará una dirección del tipo `https://algo.netlify.app`.
 - **GitHub Pages:** en el repositorio ve a *Settings → Pages → Source* y elige **GitHub Actions**.
   Cuando estos cambios lleguen a `main`, el flujo `.github/workflows/pages.yml` publica la app sola en
-  `https://alejandrofernandez04.github.io/proyecto_practicas/`.
+  `https://alejandrofernandez04.github.io/proyecto_practicas/` (redirige a la app).
 
 **2. Instalar en el iPhone:**
 
@@ -46,7 +46,7 @@ Queda con su icono en la pantalla de inicio y se abre a pantalla completa, como 
 3. Elige **Añadir a pantalla de inicio** y luego **Añadir**.
 
 Si conectas Spotify, en *Redirect URIs* añade la dirección que te muestra la app en
-*Biblioteca → Importar* (por ejemplo `https://alejandrofernandez04.github.io/proyecto_practicas/`).
+*Biblioteca → Importar* (con GitHub Pages es `https://alejandrofernandez04.github.io/proyecto_practicas/PROYECTOPRACTICAS/APP%20MUSICA/www/`).
 
 ## Sincronizar con Spotify: cómo funciona y sus límites
 
