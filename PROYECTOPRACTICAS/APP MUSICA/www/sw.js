@@ -1,11 +1,13 @@
 /* Service Worker: guarda la interfaz para que la app abra al instante
    y funcione como aplicación instalada. La música se transmite en directo. */
-const CACHE = 'sonora-v1';
+const CACHE = 'sonora-v2';
 const SHELL = [
   './',
   './index.html',
   './styles.css',
   './app.js',
+  './spotify.js',
+  './matcher.js',
   './manifest.json',
   './icons/icon.svg',
   './icons/icon-192.png',
