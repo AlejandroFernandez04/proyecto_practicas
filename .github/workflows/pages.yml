@@ -20,7 +20,10 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Sin "environment:" para no depender de las reglas de protección del entorno github-pages
+    # Entorno propio (sin reglas de protección) en lugar de "github-pages"
+    environment:
+      name: sonora-web
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
