@@ -25,6 +25,29 @@ registrarse ni ninguna clave.
 Es una APK *debug* firmada con la clave de desarrollo: sirve para instalarla tú, pero no para
 subirla a Google Play.
 
+## Instalar en iPhone
+
+Apple no permite instalar apps nativas sin pasar por la App Store, que exige un Mac y una
+cuenta de desarrollador de pago. Por eso en iPhone Sonora se instala como **app web** desde Safari.
+Queda con su icono en la pantalla de inicio y se abre a pantalla completa, como una app normal.
+
+**1. Publicar la app (una sola vez).** Elige una opción:
+
+- **Netlify Drop (lo más rápido, sin cuenta de GitHub):** entra en <https://app.netlify.com/drop>
+  y arrastra el archivo `Sonora-web.zip`. Te dará una dirección del tipo `https://algo.netlify.app`.
+- **GitHub Pages:** en el repositorio ve a *Settings → Pages → Source* y elige **GitHub Actions**.
+  Cuando estos cambios lleguen a `main`, el flujo `.github/workflows/pages.yml` publica la app sola en
+  `https://alejandrofernandez04.github.io/proyecto_practicas/`.
+
+**2. Instalar en el iPhone:**
+
+1. Abre esa dirección en **Safari** (en Chrome para iPhone no aparece la opción).
+2. Pulsa el botón **Compartir** (el cuadrado con la flecha hacia arriba).
+3. Elige **Añadir a pantalla de inicio** y luego **Añadir**.
+
+Si conectas Spotify, en *Redirect URIs* añade la dirección que te muestra la app en
+*Biblioteca → Importar* (por ejemplo `https://alejandrofernandez04.github.io/proyecto_practicas/`).
+
 ## Sincronizar con Spotify: cómo funciona y sus límites
 
 Spotify **no permite** reproducir su música fuera de la app oficial, ni siquiera con su API.
@@ -90,4 +113,6 @@ npm run apk          # copia la web a Android y compila
 | `www/manifest.json`, `www/sw.js` | Instalación como PWA |
 | `android/` | Proyecto Android generado con Capacitor |
 | `capacitor.config.json` | Configuración de la app Android (id `com.sonora.musica`) |
-| `Sonora.apk` | La app lista para instalar |
+| `Sonora.apk` | La app de Android lista para instalar |
+| `Sonora-web.zip` | La versión web (para iPhone) lista para subir a Netlify Drop |
+| `/.github/workflows/pages.yml` | Publica la versión web en GitHub Pages |

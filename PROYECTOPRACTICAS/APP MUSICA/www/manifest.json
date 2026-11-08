@@ -3,7 +3,7 @@
   "short_name": "Sonora",
   "description": "Escucha música gratis y legal de artistas independientes.",
   "lang": "es",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

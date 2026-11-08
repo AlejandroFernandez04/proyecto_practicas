@@ -825,6 +825,17 @@ function bindEvents() {
   });
 }
 
+/* ---------------- iPhone: aviso de instalación ---------------- */
+function setupIOSInstall() {
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const standalone = window.navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+  if (!isIOS || standalone || Spotify.isNative() || store.get('iosHintClosed', false)) return;
+  const box = $('#ios-install');
+  setTimeout(() => box.classList.remove('hidden'), 1500);
+  $('#ios-close').onclick = () => { box.classList.add('hidden'); store.set('iosHintClosed', true); };
+}
+
 /* ---------------- Inicio ---------------- */
 function init() {
   renderGenres();
@@ -845,6 +856,8 @@ function init() {
     history.replaceState(null, '', location.pathname);
     onSpotifyRedirect(url);
   }
+
+  setupIOSInstall();
 
   if ('serviceWorker' in navigator && !Spotify.isNative() && location.protocol !== 'file:') {
     navigator.serviceWorker.register('sw.js').catch(() => {});

@@ -10,7 +10,8 @@
   <title>Sonora · Música gratis</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <meta name="apple-mobile-web-app-title" content="Sonora">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -189,6 +190,16 @@
       </button>
     </div>
     <p class="credit muted small">Música de artistas independientes vía <a href="https://audius.co" target="_blank" rel="noopener">Audius</a></p>
+  </div>
+
+  <!-- Aviso para instalar en iPhone -->
+  <div id="ios-install" class="ios-install hidden" role="dialog" aria-label="Instalar en iPhone">
+    <button id="ios-close" class="icon-btn" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <img src="icons/icon-180.png" alt="">
+    <div>
+      <b>Instala Sonora en tu iPhone</b>
+      <p>Pulsa <svg class="share-ic" viewBox="0 0 24 24" aria-label="Compartir"><path d="M12 2 7.5 6.5l1.41 1.41L11 5.83V15h2V5.83l2.09 2.08L16.5 6.5zM5 10v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10h-3v2h1v8H7v-8h1v-2z"/></svg> <b>Compartir</b> y luego <b>Añadir a pantalla de inicio</b>.</p>
+    </div>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>

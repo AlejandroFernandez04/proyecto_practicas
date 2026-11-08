@@ -258,3 +258,17 @@ textarea.field { resize: vertical; min-height: 120px; }
 #import-bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .2s; }
 .sheet.open ~ .toast { bottom: auto; top: calc(16px + var(--safe-t)); }
 .art-ph { display: grid; place-items: center; color: rgba(255,255,255,.85); }
+
+/* ---------- Aviso de instalación en iPhone ---------- */
+.ios-install {
+  position: fixed; left: 12px; right: 12px; z-index: 15; max-width: 480px; margin: 0 auto;
+  bottom: calc(var(--nav-h) + var(--safe-b) + 12px);
+  display: flex; gap: 12px; align-items: center; padding: 14px 40px 14px 14px;
+  background: var(--text); color: var(--bg); border-radius: 14px; font-size: 14px; line-height: 1.4;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+.ios-install img { width: 48px; height: 48px; border-radius: 11px; flex: 0 0 48px; }
+.ios-install p { margin-top: 2px; }
+.ios-install .icon-btn { position: absolute; top: 4px; right: 4px; color: #555; }
+.ios-install .icon-btn svg { width: 20px; height: 20px; }
+.share-ic { display: inline; width: 18px; height: 18px; vertical-align: -3px; fill: #0a84ff; }

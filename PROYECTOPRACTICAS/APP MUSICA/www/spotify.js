@@ -19,7 +19,8 @@ const Spotify = (() => {
     del: (k) => { try { localStorage.removeItem(k); } catch { /* nada */ } },
   };
 
-  const redirectUri = () => (isNative() ? NATIVE_REDIRECT : location.origin + location.pathname);
+  // Siempre la carpeta, sin "index.html", para que coincida en Safari y en la app instalada
+  const redirectUri = () => (isNative() ? NATIVE_REDIRECT : location.origin + location.pathname.replace(/index\.html$/, ''));
   const clientId = () => (ls.get(K.client) || '').trim();
   const setClientId = (id) => ls.set(K.client, id.trim());
   const tokens = () => { try { return JSON.parse(ls.get(K.tokens)); } catch { return null; } };
