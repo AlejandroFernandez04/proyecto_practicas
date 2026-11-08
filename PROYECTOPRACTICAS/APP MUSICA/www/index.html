@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f0f14">
+  <meta name="description" content="Escucha música gratis y legal desde tu móvil.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Sonora · Música gratis</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <meta name="apple-mobile-web-app-title" content="Sonora">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="logo">Sonora</h1>
+    <span class="tagline">Música gratis</span>
+  </header>
+
+  <main id="main">
+    <!-- INICIO -->
+    <section id="view-home" class="view active" aria-label="Inicio">
+      <h2 class="section-title">Tendencias</h2>
+      <div class="chips" id="genre-chips" role="tablist" aria-label="Géneros"></div>
+      <ul class="track-list" id="home-list"></ul>
+    </section>
+
+    <!-- BUSCAR -->
+    <section id="view-search" class="view" aria-label="Buscar">
+      <form id="search-form" class="search-box" role="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.42 1.4-5.39-5.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+        <input id="search-input" type="search" placeholder="Artistas, canciones…" autocomplete="off" enterkeyhint="search" aria-label="Buscar música">
+      </form>
+      <ul class="track-list" id="search-list"></ul>
+    </section>
+
+    <!-- BIBLIOTECA -->
+    <section id="view-library" class="view" aria-label="Biblioteca">
+      <div class="row-between">
+        <h2 class="section-title">Tu biblioteca</h2>
+        <button id="btn-import" class="pill-btn">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>Importar
+        </button>
+      </div>
+      <ul class="pl-list" id="pl-list"></ul>
+    </section>
+
+    <!-- DETALLE DE PLAYLIST -->
+    <section id="view-playlist" class="view" aria-label="Playlist">
+      <button id="pl-back" class="back-btn">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>Biblioteca
+      </button>
+      <div class="pl-head">
+        <div id="pl-cover" class="pl-cover"></div>
+        <div class="pl-head-info">
+          <h2 id="pl-name"></h2>
+          <p id="pl-stats" class="muted small"></p>
+        </div>
+      </div>
+      <div class="pl-actions">
+        <button id="pl-play" class="pill-btn primary"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Reproducir</button>
+        <button id="pl-shuffle" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M10.59 9.17 5.41 4 4 5.41l5.17 5.17zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04z"/></svg>Aleatorio</button>
+        <button id="pl-sync" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6a6 6 0 0 1 5.65 8.03l1.46 1.46A8 8 0 0 0 12 4zm0 14a6 6 0 0 1-5.65-8.03L4.89 8.51A8 8 0 0 0 12 20v3l4-4-4-4z"/></svg>Sincronizar</button>
+        <button id="pl-delete" class="icon-btn" aria-label="Eliminar playlist"><svg viewBox="0 0 24 24"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"/></svg></button>
+      </div>
+      <ul class="track-list" id="pl-tracks"></ul>
+      <details id="pl-missing" class="missing hidden">
+        <summary></summary>
+        <ul id="pl-missing-list"></ul>
+      </details>
+    </section>
+  </main>
+
+  <!-- MINI REPRODUCTOR -->
+  <div id="mini-player" class="mini-player hidden" role="button" tabindex="0" aria-label="Abrir reproductor">
+    <div class="mini-progress"><div id="mini-progress-bar"></div></div>
+    <img id="mini-art" alt="">
+    <div class="mini-info">
+      <div id="mini-title" class="ellipsis"></div>
+      <div id="mini-artist" class="ellipsis muted"></div>
+    </div>
+    <button id="mini-play" class="icon-btn" aria-label="Reproducir"></button>
+    <button id="mini-next" class="icon-btn" aria-label="Siguiente"></button>
+  </div>
+
+  <!-- NAVEGACIÓN INFERIOR -->
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <button class="nav-btn active" data-view="home">
+      <svg viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3z"/></svg><span>Inicio</span>
+    </button>
+    <button class="nav-btn" data-view="search">
+      <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.42 1.4-5.39-5.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg><span>Buscar</span>
+    </button>
+    <button class="nav-btn" data-view="library">
+      <svg viewBox="0 0 24 24"><path d="M4 6H2v14a2 2 0 0 0 2 2h14v-2H4zm16-4H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 5h-3v5.5a2.5 2.5 0 1 1-1-2V5h4z"/></svg><span>Biblioteca</span>
+    </button>
+  </nav>
+
+  <!-- IMPORTAR -->
+  <div id="sheet" class="sheet" aria-hidden="true" role="dialog" aria-label="Importar playlist">
+    <div class="sheet-panel">
+      <div class="sheet-head">
+        <h2>Importar playlist</h2>
+        <button id="sheet-close" class="icon-btn" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="spotify" role="tab">Spotify</button>
+        <button class="tab" data-tab="text" role="tab">Pegar lista / CSV</button>
+      </div>
+
+      <!-- Pestaña Spotify -->
+      <div class="tab-body" id="tab-spotify">
+        <div id="sp-setup">
+          <p class="note">Spotify no deja reproducir su música fuera de su app. Sonora lee los <b>nombres</b> de tus canciones y busca cada una gratis en Audius.</p>
+          <ol class="steps small">
+            <li>Entra en <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a> y pulsa <b>Create app</b>.</li>
+            <li>En <b>Redirect URI</b> pega esto:
+              <div class="copy-row"><code id="sp-redirect"></code><button id="sp-copy" class="pill-btn small-btn">Copiar</button></div>
+            </li>
+            <li>Marca <b>Web API</b>, guarda y copia el <b>Client ID</b> aquí:</li>
+          </ol>
+          <input id="sp-client" class="field" placeholder="Client ID de Spotify" autocomplete="off" spellcheck="false">
+          <button id="sp-connect" class="wide-btn spotify">Conectar con Spotify</button>
+          <p class="muted small">Spotify exige que la cuenta que crea la app sea Premium.</p>
+        </div>
+        <div id="sp-connected" class="hidden">
+          <div class="row-between">
+            <span id="sp-user" class="small"></span>
+            <button id="sp-logout" class="link-btn small">Desconectar</button>
+          </div>
+          <ul class="pl-list" id="sp-playlists"></ul>
+        </div>
+      </div>
+
+      <!-- Pestaña texto -->
+      <div class="tab-body hidden" id="tab-text">
+        <p class="note">Escribe una canción por línea como <b>Artista - Canción</b>, o sube el CSV de tu playlist (lo puedes descargar gratis desde <a href="https://exportify.app" target="_blank" rel="noopener">Exportify</a>).</p>
+        <input id="txt-name" class="field" placeholder="Nombre de la playlist" maxlength="80">
+        <textarea id="txt-list" class="field" rows="7" placeholder="Rosalía - Despechá&#10;Bad Bunny - Tití Me Preguntó&#10;Daft Punk - One More Time"></textarea>
+        <label class="wide-btn ghost">
+          <input id="txt-file" type="file" accept=".csv,.txt,text/csv,text/plain" hidden>Subir archivo CSV
+        </label>
+        <button id="txt-import" class="wide-btn">Buscar canciones gratis</button>
+      </div>
+
+      <!-- Progreso -->
+      <div id="import-progress" class="progress hidden">
+        <p id="import-label" class="small"></p>
+        <div class="bar"><div id="import-bar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPRODUCTOR COMPLETO -->
+  <div id="full-player" class="full-player" aria-hidden="true" role="dialog" aria-label="Reproductor">
+    <div class="fp-bg" id="fp-bg"></div>
+    <div class="fp-header">
+      <button id="fp-close" class="icon-btn" aria-label="Cerrar reproductor">
+        <svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+      </button>
+      <span class="muted small">Reproduciendo</span>
+      <button id="fp-fav" class="icon-btn" aria-label="Añadir a favoritos"></button>
+    </div>
+    <img id="fp-art" class="fp-art" alt="">
+    <div class="fp-meta">
+      <div id="fp-title" class="fp-title ellipsis"></div>
+      <div id="fp-artist" class="muted ellipsis"></div>
+      <div id="fp-orig" class="fp-orig small hidden"></div>
+    </div>
+    <div class="fp-seek">
+      <input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Posición">
+      <div class="times muted small"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div>
+    </div>
+    <div class="fp-controls">
+      <button id="btn-shuffle" class="icon-btn toggle" aria-label="Aleatorio" aria-pressed="false">
+        <svg viewBox="0 0 24 24"><path d="M10.59 9.17 5.41 4 4 5.41l5.17 5.17zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04z"/></svg>
+      </button>
+      <button id="btn-prev" class="icon-btn big" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button id="btn-play" class="play-btn" aria-label="Reproducir"></button>
+      <button id="btn-next" class="icon-btn big" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><path d="m6 18 8.5-6L6 6zM16 6v12h2V6z"/></svg>
+      </button>
+      <button id="btn-repeat" class="icon-btn toggle" aria-label="Repetir" aria-pressed="false">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2z"/></svg>
+      </button>
+    </div>
+    <p class="credit muted small">Música de artistas independientes vía <a href="https://audius.co" target="_blank" rel="noopener">Audius</a></p>
+  </div>
+
+  <!-- Aviso para instalar en iPhone -->
+  <div id="ios-install" class="ios-install hidden" role="dialog" aria-label="Instalar en iPhone">
+    <button id="ios-close" class="icon-btn" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <img src="icons/icon-180.png" alt="">
+    <div>
+      <b>Instala Sonora en tu iPhone</b>
+      <p>Pulsa <svg class="share-ic" viewBox="0 0 24 24" aria-label="Compartir"><path d="M12 2 7.5 6.5l1.41 1.41L11 5.83V15h2V5.83l2.09 2.08L16.5 6.5zM5 10v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10h-3v2h1v8H7v-8h1v-2z"/></svg> <b>Compartir</b> y luego <b>Añadir a pantalla de inicio</b>.</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <audio id="audio" preload="none"></audio>
+  <script src="spotify.js"></script>
+  <script src="matcher.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
