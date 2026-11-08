@@ -20,9 +20,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # Sin "environment:" para no depender de las reglas de protección del entorno github-pages
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
@@ -31,3 +29,4 @@ jobs:
           path: "PROYECTOPRACTICAS/APP MUSICA/www"
       - id: deployment
         uses: actions/deploy-pages@v4
+      - run: echo "Publicado en ${{ steps.deployment.outputs.page_url }}"
